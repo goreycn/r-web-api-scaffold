@@ -1,9 +1,13 @@
 use crate::handlers::api_handler::{health_check, json_error, not_found};
 use actix_web::{App, HttpServer, web};
+use mimalloc::MiMalloc;
 use std::env;
 
 mod config;
 mod handlers;
+
+#[global_allocator]
+static GLOBAL: MiMalloc = MiMalloc;
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
